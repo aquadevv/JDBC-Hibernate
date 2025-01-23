@@ -22,6 +22,11 @@ public class User {
 
     }
 
+    @Override
+    public String toString() {
+        return String.format("User with name - %s added to the database", name);
+    }
+
     public User(String name, String lastName, Byte age) {
         this.name = name;
         this.lastName = lastName;

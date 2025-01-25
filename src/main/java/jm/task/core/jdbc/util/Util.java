@@ -4,7 +4,9 @@ import jm.task.core.jdbc.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class Util {
@@ -26,12 +28,6 @@ public class Util {
     }
 
     public static SessionFactory getSessionFactory() {
-        try {
-            return new Configuration().addAnnotatedClass(User.class).buildSessionFactory();
-        } catch (Exception e) {
-            logger.severe("Failed to create SessionFactory. Error: " + e.getMessage());
-            throw new RuntimeException("Hibernate initialization error", e);
-        }
-
+        return new Configuration().addAnnotatedClass(User.class).buildSessionFactory();
     }
 }

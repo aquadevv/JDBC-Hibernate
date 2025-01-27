@@ -6,9 +6,9 @@ import java.util.logging.Logger;
 
 public class Main {
     private static final Logger logger = Logger.getLogger(Main.class.getName());
-    private static final UserServiceImpl userService = new UserServiceImpl();
 
     public static void main(String[] args) {
+        UserServiceImpl userService = new UserServiceImpl();
         userService.createUsersTable();
         userService.saveUser("Ivan", "Ivanov", (byte) 5);
         userService.saveUser("Petr", "Petrov", (byte) 10);

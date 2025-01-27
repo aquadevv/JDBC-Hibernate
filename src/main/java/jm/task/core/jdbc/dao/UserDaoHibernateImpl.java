@@ -28,7 +28,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.createSQLQuery(createUsersTableQuery).executeUpdate();
                 transaction.commit();
             } catch (Exception e) {
-                if (transaction != null && transaction.isActive()) transaction.rollback();
+                if (transaction.isActive()) transaction.rollback();
                 logger.severe("Error creating users table: " + e.getMessage());
             }
         }
@@ -43,7 +43,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.createSQLQuery(dropUsersTableQuery).executeUpdate();
                 transaction.commit();
             } catch (Exception e) {
-                if (transaction != null && transaction.isActive()) transaction.rollback();
+                if (transaction.isActive()) transaction.rollback();
                 logger.severe("Error delete users table: " + e.getMessage());
             }
         }
@@ -57,7 +57,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.save(new User(name, lastName, age));
                 transaction.commit();
             } catch (Exception e) {
-                if (transaction != null && transaction.isActive()) transaction.rollback();
+                if (transaction.isActive()) transaction.rollback();
                 logger.severe("Error saving user: " + e.getMessage());
             }
         }
@@ -73,7 +73,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 else logger.log(Level.WARNING, "User with id {0} not found", id);
                 transaction.commit();
             } catch (Exception e) {
-                if (transaction != null && transaction.isActive()) transaction.rollback();
+                if (transaction.isActive()) transaction.rollback();
                 logger.severe("Error delete user: " + e.getMessage());
             }
         }
@@ -94,7 +94,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.createQuery("DELETE FROM User").executeUpdate();
                 transaction.commit();
             } catch (Exception e) {
-                if (transaction != null && transaction.isActive()) transaction.rollback();
+                if (transaction.isActive()) transaction.rollback();
                 logger.severe("Error cleaning user table: " + e.getMessage());
             }
         }

@@ -27,7 +27,7 @@ public class UserDaoHibernateImpl implements UserDao {
             try {
                 session.createSQLQuery(createUsersTableQuery).executeUpdate();
                 transaction.commit();
-            } catch (Exception e) {
+            } catch (HibernateException e) {
                 if (transaction.isActive()) transaction.rollback();
                 logger.severe("Error creating users table: " + e.getMessage());
             }
@@ -42,7 +42,7 @@ public class UserDaoHibernateImpl implements UserDao {
             try {
                 session.createSQLQuery(dropUsersTableQuery).executeUpdate();
                 transaction.commit();
-            } catch (Exception e) {
+            } catch (HibernateException e) {
                 if (transaction.isActive()) transaction.rollback();
                 logger.severe("Error delete users table: " + e.getMessage());
             }
@@ -56,7 +56,7 @@ public class UserDaoHibernateImpl implements UserDao {
             try {
                 session.save(new User(name, lastName, age));
                 transaction.commit();
-            } catch (Exception e) {
+            } catch (HibernateException e) {
                 if (transaction.isActive()) transaction.rollback();
                 logger.severe("Error saving user: " + e.getMessage());
             }
@@ -72,7 +72,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 if (user != null) session.delete(user);
                 else logger.log(Level.WARNING, "User with id {0} not found", id);
                 transaction.commit();
-            } catch (Exception e) {
+            } catch (HibernateException e) {
                 if (transaction.isActive()) transaction.rollback();
                 logger.severe("Error delete user: " + e.getMessage());
             }
@@ -93,7 +93,7 @@ public class UserDaoHibernateImpl implements UserDao {
             try {
                 session.createQuery("DELETE FROM User").executeUpdate();
                 transaction.commit();
-            } catch (Exception e) {
+            } catch (HibernateException e) {
                 if (transaction.isActive()) transaction.rollback();
                 logger.severe("Error cleaning user table: " + e.getMessage());
             }
